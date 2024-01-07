@@ -1,0 +1,138 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap and other stylesheets -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-index.css">
+
+    <!-- Page title -->
+    <title>My E-Commerce Store</title>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="bg-dark text-white text-center p-3">
+        <h1>My E-Commerce Store</h1>
+        <button class="btn btn-outline-light" onclick="toggleCart()">Show Cart <span id="cart-count" class="badge badge-pill badge-danger">0</span></button>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <!-- Navbar toggler button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Electronics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Clothing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+                <!-- Search form -->
+                <form class="form-inline ml-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" id="searchInput"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="button"
+                        onclick="searchProducts()">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <main class="container mt-4">
+        <div class="row" id="product-list">
+            <!-- Product items will be dynamically added here -->
+        </div>
+    </main>
+
+    <!-- Cart and Checkout Modals -->
+    <div id="cart-modal" class="modal" tabindex="-1">
+        <!-- Your existing cart modal content here -->
+    </div>
+
+    <div id="checkout-modal" class="modal" tabindex="-1">
+        <!-- Your existing checkout modal content here -->
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-white text-center p-3">
+        <p>&copy; 2024 My E-Commerce Store. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript and jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="index.js"></script>
+    <script>
+        // Function to load and display products on the index page
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProducts();
+        });
+
+        // Function to toggle the cart and navigate to cart.html
+        function toggleCart() {
+            console.log('toggleCart called');
+            saveCartToLocalStorage();
+            const cartData = JSON.stringify(cart);
+            window.location.href = `cart.html?cartData=${encodeURIComponent(cartData)}`;
+        }
+
+        // Function to add a product to the cart
+        function addToCart(productId, index) {
+            const selectedProduct = products.find(product => product.id === productId);
+
+            if (selectedProduct) {
+                cart.push(selectedProduct);
+                updateCartCount();
+                saveCartToLocalStorage();
+                updateRecommendations(); // Update recommendations based on cart items
+            }
+        }
+
+        // Function to search products
+        function searchProducts() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.toLowerCase();
+
+            // Filter products based on the search term
+            const filteredProducts = products.filter(product =>
+                product.title.toLowerCase().includes(searchTerm)
+            );
+
+            // Display the filtered products
+            displayProducts(filteredProducts);
+        }
+    </script>
+
+</body>
+
+</html>
