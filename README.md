@@ -11,7 +11,7 @@ An interactive e-commerce website that allows users to browse and purchase produ
 
 ## Introduction
 
-The E-Commerce Website is designed to provide users with an easy and enjoyable online shopping experience. Users can explore a variety of products, add items to their shopping cart, and proceed to a secure checkout process.
+The E-Commerce Website is designed to provide users with an easy and enjoyable online shopping experience. Users can explore a variety of products, add items to their shopping cart, and proceed to a secure checkout process.     
 To check on the site visit - [E-commerce_website](https://fanciful-marigold-f5fa80.netlify.app/)
 
 ## Features
